@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import './Home.css';
 
 const Home: React.FC = () => {
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
 
   return (
     <IonPage>

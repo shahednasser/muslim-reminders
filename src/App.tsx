@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -23,15 +23,19 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path="/home" component={Home} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC<{setDirectionCB: Function, direction: string}> = ({setDirectionCB, direction}) => {
+  const [dir, setDirection] = useState(direction);
+  setDirectionCB(setDirection);
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet dir={dir}>
+          <Route path="/home" component={Home} exact={true} />
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;

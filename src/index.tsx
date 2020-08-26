@@ -7,8 +7,11 @@ import { Plugins } from '@capacitor/core';
 import resources from './i18n';
 import * as serviceWorker from './serviceWorker';
 
+let direction = 'ltr';
+
 Plugins.Device.getLanguageCode()
-    .then((language) => {
+    .then(async (language) => {
+        direction = language.value.indexOf('ar') !== -1 ? 'rtl' : 'ltr';
         i18n.use(initReactI18next)
         .init({
             resources,
@@ -19,9 +22,18 @@ Plugins.Device.getLanguageCode()
             }
 
         });
-    })
+        setDirection(direction);
+    });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+let directionCB: Function|null = null;
+
+function setDirection (direction: string) {
+    if (directionCB) {
+        directionCB(direction);
+    }
+}
+
+ReactDOM.render(<App setDirectionCB={(cb: Function) => directionCB = cb} direction={direction} />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
