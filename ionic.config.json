@@ -1,0 +1,7 @@
+{
+  "name": "muslim-reminders",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
