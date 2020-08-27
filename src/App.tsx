@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { Route, Redirect } from 'react-router-dom';
+import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import { alarmSharp, settingsOutline } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -22,17 +22,34 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Reminders from './pages/Reminders';
+import Settings from './pages/Settings';
+import { useTranslation } from 'react-i18next';
 
 const App: React.FC<{setDirectionCB: Function, direction: string}> = ({setDirectionCB, direction}) => {
   const [dir, setDirection] = useState(direction);
+  const [t] = useTranslation();
   setDirectionCB(setDirection);
   return (
     <IonApp>
       <IonReactRouter>
-        <IonRouterOutlet dir={dir}>
-          <Route path="/home" component={Home} exact={true} />
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
-        </IonRouterOutlet>
+        <IonTabs>
+            <IonRouterOutlet dir={dir}>
+                <Route path="/reminders" component={Reminders} exact={true} />
+                <Route path="/settings" component={Settings} exact={true} />
+                <Route path="/" render={() => <Redirect to="/reminders" />} exact={true} /> 
+            </IonRouterOutlet>
+            <IonTabBar slot="bottom">
+                <IonTabButton tab="reminders" href="/reminders">
+                    <IonIcon icon={alarmSharp} />
+                    <IonLabel>{t('Reminders')}</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="settings" href="/settings">
+                    <IonIcon icon={settingsOutline} />
+                    <IonLabel>{t('Settings')}</IonLabel>
+                </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
       </IonReactRouter>
     </IonApp>
   );
