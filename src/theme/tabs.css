@@ -1,0 +1,5 @@
+@media (prefers-color-scheme: dark) {
+    ion-tab-button:not(.tab-selected) ion-icon {
+        color: #fff;
+    }
+}

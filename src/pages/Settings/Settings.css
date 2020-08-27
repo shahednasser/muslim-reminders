@@ -1,0 +1,46 @@
+ion-content.settings-content {
+    --background: #f3f3f3;
+    --ion-item-background: transparent; /* for ion-list */
+}
+
+.settings-content ion-item-divider {
+    --background: transparent;
+    --inner-padding-top: 10px;
+    --inner-padding-bottom: 10px;
+    border: none;
+}
+
+.settings-content ion-item {
+    --background: #fff;
+}
+
+.settings-content h2 {
+    margin-top: 5px;
+}
+
+/** DARK MODE **/
+@media (prefers-color-scheme: dark) {
+    ion-content.settings-content {
+        --background: #000;
+    }
+
+    .settings-content h2 {
+        --color: #fff;
+    }
+
+    .settings-content ion-item {
+        --background: rgb(51 51 51 / 80%);
+    }
+}
+
+body.dark ion-content.settings-content {
+    --background: #000;
+}
+
+body.dark .settings-content h2 {
+    --color: #fff;
+}
+
+body.dark .settings-content ion-item {
+    --background: rgb(51 51 51 / 80%);
+}

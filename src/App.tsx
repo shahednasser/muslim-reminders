@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { alarmSharp, settingsOutline } from 'ionicons/icons';
+import Reminders from './pages/Reminders';
+import Settings from './pages/Settings/Settings';
+import { useTranslation } from 'react-i18next';
+import { alarmOutline, settingsOutline } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -22,9 +25,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Reminders from './pages/Reminders';
-import Settings from './pages/Settings';
-import { useTranslation } from 'react-i18next';
+import './theme/dark-mode.css';
+import './theme/tabs.css';
 
 const App: React.FC<{setDirectionCB: Function, direction: string}> = ({setDirectionCB, direction}) => {
   const [dir, setDirection] = useState(direction);
@@ -41,7 +43,7 @@ const App: React.FC<{setDirectionCB: Function, direction: string}> = ({setDirect
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
                 <IonTabButton tab="reminders" href="/reminders">
-                    <IonIcon icon={alarmSharp} />
+                    <IonIcon icon={alarmOutline} />
                     <IonLabel>{t('Reminders')}</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="settings" href="/settings">
