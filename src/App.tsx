@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Reminders from './pages/Reminders';
+import Reminders from './pages/Reminders/Reminders';
 import Settings from './pages/Settings/Settings';
 import { useTranslation } from 'react-i18next';
 import { alarmOutline, settingsOutline } from 'ionicons/icons';
+import { checkReminders } from './utils/helpers';  
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,6 +33,12 @@ const App: React.FC<{setDirectionCB: Function, direction: string}> = ({setDirect
   const [dir, setDirection] = useState(direction);
   const [t] = useTranslation();
   setDirectionCB(setDirection);
+
+  useEffect(() => {
+    //check if new reminders need to be added
+
+  }, []);
+
   return (
     <IonApp>
       <IonReactRouter>
